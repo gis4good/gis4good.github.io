@@ -3,7 +3,12 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <!-- Mobile meta tags to go in head-->
+        <meta name="HandheldFriendly" content="True">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+        <meta name="MobileOptimized" content="320"/>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta http-equiv="cleartype" content="on">
         <meta name="mobile-web-app-capable" content="yes">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link rel="stylesheet" href="css/leaflet.css"><link rel="stylesheet" href="css/L.Control.Locate.min.css">
@@ -15,6 +20,10 @@
         #map {
             width: 1850px;
             height: 900px;
+        }.leaflet-popup-content {
+        min-width: 200px;
+        min-height: 100px;
+        overflow-y: scroll;
         }
         </style>
         <title></title>
@@ -55,7 +64,7 @@
             zoomControl:true, maxZoom:28, minZoom:1
         }).fitBounds([[-16.201070799776012,31.989697621196072],[53.27673591571577,125.00160533973882]]);
         var hash = new L.Hash(map);
-        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="http://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
+        map.attributionControl.setPrefix('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a> &middot; <a href="https://leafletjs.com" title="A JS library for interactive maps">Leaflet</a>');
         L.control.locate({locateOptions: {maxZoom: 19}}).addTo(map);
         var measureControl = new L.Control.Measure({
             position: 'topleft',
@@ -72,7 +81,7 @@
         var bounds_group = new L.featureGroup([]);
         function setBounds() {
         }
-        var layer_StamenWatercolor_0 = L.tileLayer('http://tile.stamen.com/watercolor/{z}/{x}/{y}.jpg', {
+        var layer_StamenWatercolor_0 = L.tileLayer('https://tile.stamen.com/watercolor/{z}/{x}/{y}.jpg', {
             opacity: 1.0
         });
         layer_StamenWatercolor_0.addTo(map);
@@ -168,7 +177,7 @@
                     feature: feature,
                     variables: {}
                 };
-                return L.circleMarker(latlng, style_ne_10m_airports_1_0(feature));
+                return L.marker(latlng, style_ne_10m_airports_1_0(feature));
             },
         });
         bounds_group.addLayer(layer_ne_10m_airports_1);
